@@ -32,7 +32,7 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     baseURL: process.env.UI_URL,
-    storageState: './storageState.json',   // <- reuse session here
+    storageState: '/auth/storageState.json',   // <- reuse session here
     screenshot: "on",
     video: "on"
   },
