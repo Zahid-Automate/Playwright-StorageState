@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../pages/loginPage';
 
 test.use({ storageState: './auth/storageState.json' });
 
 test.describe('My Account Login Test', () => {
+  const loginPage = new LoginPage();
   test('Validate my account page', async ({ page }) => {
     await page.goto('https://practicesoftwaretesting.com/account'); // correct logged-in page
     await expect(page.locator('[data-test="nav-menu"]')).toBeVisible();
@@ -13,11 +15,8 @@ test.describe('My Account Login Test', () => {
 
   test.afterEach(async ({ page }) => {
     // Ensure the user is logged out after each test
-    await page.locator('[data-test="nav-menu"]').click();
-    await page.waitForSelector('[data-test="nav-sign-out"]');
-    await page.click('[data-test="nav-sign-out"]');
-    await expect(page.locator('[data-test="nav-sign-in"]')).toBeVisible();
-    expect(await page.locator('[data-test="nav-sign-in"]').innerText()).toContain('Sign in');
+    loginPage.logout();
+    await page.waitForTimeout(1000); // Wait for logout to complete
     await page.close();
   });
 });
