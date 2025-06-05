@@ -4,7 +4,7 @@ import { LoginPage } from '../../pages/loginPage';
 test.use({ storageState: './auth/storageState.json' });
 
 test.describe('My Account Login Test', () => {
-  const loginPage = new LoginPage();
+  
   test('Validate my account page', async ({ page }) => {
     await page.goto('https://practicesoftwaretesting.com/account'); // correct logged-in page
     await expect(page.locator('[data-test="nav-menu"]')).toBeVisible();
@@ -15,7 +15,8 @@ test.describe('My Account Login Test', () => {
 
   test.afterEach(async ({ page }) => {
     // Ensure the user is logged out after each test
-    loginPage.logout();
+    const loginPage = new LoginPage(page);
+    await loginPage.logout();
     await page.waitForTimeout(1000); // Wait for logout to complete
     await page.close();
   });
