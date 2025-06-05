@@ -20,6 +20,13 @@ export class LoginPage {
     await this.submit.waitFor({ state: 'visible' });
     await this.submit.click();
   }
+
+  async logout() {
+    await this.navMenu.click();
+    await this.navSignOut.waitFor({ state: 'visible' });
+    await this.navSignOut.click();
+    await this.navSignIn.waitFor({ state: 'visible' });
+  }
 }
 // This class encapsulates the login page functionality for Playwright tests.
 // It includes methods to navigate to the login page and perform login actions.
