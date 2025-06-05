@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-test.use({ storageState: './storageState.json' });
+test.use({ storageState: './auth/storageState.json' });
 
 test.describe('My Account Login Test', () => {
-  test('validate my account page', async ({ page }) => {
+  test('Validate my account page', async ({ page }) => {
     await page.goto('https://practicesoftwaretesting.com/account'); // correct logged-in page
     await expect(page.locator('[data-test="nav-menu"]')).toBeVisible();
     expect(await page.locator('[data-test="nav-menu"]').innerText()).toContain('Mohammed A Zahid');
